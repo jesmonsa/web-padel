@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PadelClub Elite - Reserva tu Pista</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-tennis-ball"></i>
+                    <span>PadelClub Elite</span>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#pistas" class="nav-link">Pistas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#reservas" class="nav-link">Reservas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contacto" class="nav-link">Contacto</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Reserva tu Pista de Pádel</h1>
+            <p>Las mejores instalaciones con tecnología de última generación</p>
+            <a href="#reservas" class="btn-primary">Reservar Ahora</a>
+        </div>
+        <div class="hero-image">
+            <i class="fas fa-table-tennis" style="font-size: 10rem; color: rgba(255,255,255,0.1);"></i>
+        </div>
+    </section>
+
+    <!-- Pistas Section -->
+    <section id="pistas" class="pistas-section">
+        <div class="container">
+            <h2 class="section-title">Nuestras Pistas</h2>
+            <div class="pistas-grid">
+                <div class="pista-card">
+                    <div class="pista-image">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Pista Central</h3>
+                    <p>Pista profesional con césped sintético premium</p>
+                    <div class="pista-features">
+                        <span class="feature"><i class="fas fa-sun"></i> Cubierta</span>
+                        <span class="feature"><i class="fas fa-lightbulb"></i> LED</span>
+                    </div>
+                    <div class="pista-price">25€/hora</div>
+                </div>
+                
+                <div class="pista-card">
+                    <div class="pista-image">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Pista Norte</h3>
+                    <p>Perfecta para entrenamientos y partidos casuales</p>
+                    <div class="pista-features">
+                        <span class="feature"><i class="fas fa-cloud-sun"></i> Semi-cubierta</span>
+                        <span class="feature"><i class="fas fa-lightbulb"></i> LED</span>
+                    </div>
+                    <div class="pista-price">20€/hora</div>
+                </div>
+                
+                <div class="pista-card">
+                    <div class="pista-image">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>Pista Sur</h3>
+                    <p>Ideal para principiantes y clases</p>
+                    <div class="pista-features">
+                        <span class="feature"><i class="fas fa-sun"></i> Exterior</span>
+                        <span class="feature"><i class="fas fa-lightbulb"></i> Halógena</span>
+                    </div>
+                    <div class="pista-price">15€/hora</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservas Section -->
+    <section id="reservas" class="reservas-section">
+        <div class="container">
+            <h2 class="section-title">Hacer Reserva</h2>
+            
+            <div class="reserva-container">
+                <div class="reserva-form-container">
+                    <form id="reservaForm" class="reserva-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre">Nombre Completo</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pista">Pista</label>
+                                <select id="pista" name="pista" required>
+                                    <option value="">Seleccionar pista</option>
+                                    <option value="central" data-price="25">Pista Central - 25€/h</option>
+                                    <option value="norte" data-price="20">Pista Norte - 20€/h</option>
+                                    <option value="sur" data-price="15">Pista Sur - 15€/h</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fecha">Fecha</label>
+                                <input type="date" id="fecha" name="fecha" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="hora">Hora</label>
+                                <select id="hora" name="hora" required>
+                                    <option value="">Seleccionar hora</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="duracion">Duración</label>
+                            <select id="duracion" name="duracion" required>
+                                <option value="1">1 hora</option>
+                                <option value="1.5">1.5 horas</option>
+                                <option value="2">2 horas</option>
+                            </select>
+                        </div>
+                        
+                        <div class="precio-total">
+                            <span>Total: <span id="precioTotal">0€</span></span>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary btn-full">Reservar Pista</button>
+                    </form>
+                </div>
+                
+                <div class="reservas-lista-container">
+                    <h3>Mis Reservas</h3>
+                    <div id="reservasLista" class="reservas-lista">
+                        <!-- Las reservas se cargarán aquí dinámicamente -->
+                    </div>
+                    <button id="limpiarReservas" class="btn-secondary">Limpiar Todas las Reservas</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="contacto-section">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="contacto-grid">
+                <div class="contacto-info">
+                    <h3>Información de Contacto</h3>
+                    <div class="contacto-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Calle del Pádel, 123, Madrid</span>
+                    </div>
+                    <div class="contacto-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+34 123 456 789</span>
+                    </div>
+                    <div class="contacto-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@padelclubelite.com</span>
+                    </div>
+                    <div class="horarios">
+                        <h4>Horarios</h4>
+                        <p>Lunes a Viernes: 8:00 - 23:00</p>
+                        <p>Sábados y Domingos: 9:00 - 22:00</p>
+                    </div>
+                </div>
+                <div class="contacto-form">
+                    <h3>Envíanos un Mensaje</h3>
+                    <form id="contactoForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Mensaje" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-tennis-ball"></i>
+                        <span>PadelClub Elite</span>
+                    </div>
+                    <p>El mejor club de pádel de la ciudad</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Inicio</a></li>
+                        <li><a href="#pistas">Pistas</a></li>
+                        <li><a href="#reservas">Reservas</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PadelClub Elite. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirmacionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>¡Reserva Confirmada!</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="confirmacion-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div id="detallesReserva"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
