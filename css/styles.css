@@ -109,13 +109,13 @@ body {
 .hero {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: var(--white);
-    padding: 120px 20px 80px;
+    padding: 80px 20px 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    min-height: 80vh;
+    min-height: 50vh;
 }
 
 .hero-content {
