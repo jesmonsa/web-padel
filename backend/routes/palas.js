@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   try {
     const { marca, precio_min, precio_max, peso_min, peso_max, balance, forma, limit = 50, offset = 0 } = req.query;
     
-    let query = 'SELECT * FROM palas WHERE 1=1';
+    let query = 'SELECT id, marca, modelo as nombre, peso, balance, forma, precio, descripcion, imagen as imagen_url FROM palas WHERE 1=1';
     const params = [];
     
     // Filtros opcionales
@@ -49,7 +49,7 @@ router.get('/', async (req, res) => {
     query += ' ORDER BY marca, modelo LIMIT ? OFFSET ?';
     params.push(parseInt(limit), parseInt(offset));
     
-    const palas = await mysql.execute(query, params);
+    const [palas] = await mysql.pool.execute(query, params);
     
     // Contar total para paginación
     let countQuery = 'SELECT COUNT(*) as total FROM palas WHERE 1=1';
@@ -63,7 +63,7 @@ router.get('/', async (req, res) => {
     if (balance) countQuery += ' AND balance = ?';
     if (forma) countQuery += ' AND forma = ?';
     
-    const [{ total }] = await mysql.execute(countQuery, countParams);
+    const [[{ total }]] = await mysql.pool.execute(countQuery, countParams);
     
     res.json({
       success: true,

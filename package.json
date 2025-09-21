@@ -1,0 +1,26 @@
+{
+  "name": "web-padel",
+  "version": "1.0.0",
+  "description": "Sistema completo de gestión de reservas para club de pádel con autenticación JWT, CRUD completo y arquitectura híbrida (MySQL + MongoDB).",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesmonsa/web-padel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jesmonsa/web-padel/issues"
+  },
+  "homepage": "https://github.com/jesmonsa/web-padel#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}
