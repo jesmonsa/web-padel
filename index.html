@@ -27,12 +27,34 @@
                         <a href="#articulos" class="nav-link">Artículos</a>
                     </li>
                     <li class="nav-item">
+                        <a href="#tienda" class="nav-link">Tienda</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#reservas" class="nav-link">Reservas</a>
                     </li>
                     <li class="nav-item">
                         <a href="#contacto" class="nav-link">Contacto</a>
                     </li>
                 </ul>
+                <div class="auth-buttons">
+                    <button id="loginBtn" class="auth-btn login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+                    <button id="registerBtn" class="auth-btn register-btn">
+                        <i class="fas fa-user-plus"></i> Registrarse
+                    </button>
+                    <div id="userMenu" class="user-menu" style="display: none;">
+                        <button class="user-profile-btn">
+                            <i class="fas fa-user"></i>
+                            <span id="userName">Usuario</span>
+                        </button>
+                        <div class="user-dropdown">
+                            <a href="#profile"><i class="fas fa-user-cog"></i> Mi Perfil</a>
+                            <a href="#mis-reservas"><i class="fas fa-calendar"></i> Mis Reservas</a>
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="hamburger">
                     <span class="bar"></span>
                     <span class="bar"></span>
@@ -195,6 +217,20 @@
                     <p>Pasos sencillos para limpiar y cuidar tu pala de padel correctamente. Usa agua tibia y jabon neutro, seca completamente y evita productos quimicos agresivos...</p>
                     <a href="#" class="articulo-link">Leer más <i class="fas fa-arrow-right"></i></a>
                 </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tienda Section -->
+    <section id="tienda" class="tienda-section">
+        <div class="container">
+            <h2 class="section-title">Nuestra Tienda de Palas</h2>
+            <div class="palas-grid" id="palas-grid">
+                <!-- Las palas se cargarán dinámicamente desde el backend -->
+                <div class="loading-placeholder">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Cargando palas...</p>
+                </div>
             </div>
         </div>
     </section>
@@ -362,6 +398,109 @@
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</h2>
+                <span class="close" data-modal="loginModal">&times;</span>
+            </div>
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="loginEmail">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <input type="email" id="loginEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">
+                        <i class="fas fa-lock"></i> Contraseña
+                    </label>
+                    <input type="password" id="loginPassword" name="password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                    </button>
+                    <p class="auth-switch">
+                        ¿No tienes cuenta? 
+                        <a href="#" id="switchToRegister">Regístrate aquí</a>
+                    </p>
+                </div>
+                <div id="loginError" class="error-message" style="display: none;"></div>
+                <div id="loginSuccess" class="success-message" style="display: none;"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Registro -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus"></i> Registrarse</h2>
+                <span class="close" data-modal="registerModal">&times;</span>
+            </div>
+            <form id="registerForm" class="auth-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="registerName">
+                            <i class="fas fa-user"></i> Nombre completo
+                        </label>
+                        <input type="text" id="registerName" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">
+                            <i class="fas fa-envelope"></i> Email
+                        </label>
+                        <input type="email" id="registerEmail" name="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="registerPhone">
+                            <i class="fas fa-phone"></i> Teléfono (opcional)
+                        </label>
+                        <input type="tel" id="registerPhone" name="telefono">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerLevel">
+                            <i class="fas fa-chart-line"></i> Nivel de juego
+                        </label>
+                        <select id="registerLevel" name="nivel">
+                            <option value="principiante">Principiante</option>
+                            <option value="intermedio">Intermedio</option>
+                            <option value="avanzado">Avanzado</option>
+                            <option value="profesional">Profesional</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">
+                        <i class="fas fa-lock"></i> Contraseña
+                    </label>
+                    <input type="password" id="registerPassword" name="password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="registerPasswordConfirm">
+                        <i class="fas fa-lock"></i> Confirmar contraseña
+                    </label>
+                    <input type="password" id="registerPasswordConfirm" name="passwordConfirm" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-user-plus"></i> Registrarse
+                    </button>
+                    <p class="auth-switch">
+                        ¿Ya tienes cuenta? 
+                        <a href="#" id="switchToLogin">Inicia sesión aquí</a>
+                    </p>
+                </div>
+                <div id="registerError" class="error-message" style="display: none;"></div>
+                <div id="registerSuccess" class="success-message" style="display: none;"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js?v=1.3"></script>
 </body>
 </html>

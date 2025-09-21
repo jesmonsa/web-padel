@@ -1,170 +1,289 @@
 # 🎾 PadelClub Elite - Sistema de Reservas Web
 
-Una aplicación web profesional para la gestión de reservas de pistas de pádel con almacenamiento local y diseño responsivo.
+Sistema completo de gestión de reservas para club de pádel con autenticación JWT, CRUD completo y arquitectura híbrida (MySQL + MongoDB).
 
-## ✨ Características
+## ✨ Características Principales
 
-### 🏛️ **Funcionalidades Principales**
-- **Sistema de Reservas Completo**: Reserva pistas por fecha, hora y duración
-- **Gestión de Disponibilidad**: Control automático de horarios ocupados
-- **Almacenamiento Local**: Todas las reservas se guardan en localStorage
-- **Diseño Responsivo**: Optimizado para móviles, tablets y desktop
-- **Interfaz Profesional**: Diseño moderno con animaciones y efectos
+### 🔐 **Sistema de Autenticación**
+- Registro y login de usuarios con JWT
+- Autenticación segura con bcrypt
+- Gestión de perfiles de usuario
+- Control de acceso a reservas
 
-### 🏓 **Pistas Disponibles**
+### 🏛️ **Funcionalidades Core**
+- **CRUD Completo de Reservas**: Crear, leer, actualizar y eliminar reservas
+- **Propiedad de Reservas**: Solo el propietario puede modificar/eliminar
+- **Almacenamiento Híbrido**: MySQL (contenido estático) + MongoDB (datos dinámicos)
+- **API REST**: Backend completo con Express.js
+- **Diseño Responsivo**: Frontend optimizado para todos los dispositivos
+
+### 🏓 **Gestión de Pistas**
 - **Pista Central**: €25/hora - Profesional con césped sintético premium
 - **Pista Norte**: €20/hora - Perfecta para entrenamientos 
 - **Pista Sur**: €15/hora - Ideal para principiantes
 
-### 🕐 **Horarios**
-- **Lunes a Viernes**: 8:00 - 23:00
-- **Sábados y Domingos**: 9:00 - 22:00
-- **Reservas**: Por horas completas (1h, 1.5h, 2h)
-
-## 🗂️ Estructura del Proyecto
+## 🏗️ Arquitectura del Sistema
 
 ```
 web-padel/
-├── index.html          # Página principal
-├── css/
-│   └── styles.css      # Estilos CSS personalizados
-├── js/
-│   └── script.js       # Lógica JavaScript
-└── images/             # Carpeta para imágenes (vacía)
+├── backend/                     # Servidor Express.js
+│   ├── config/
+│   │   ├── mongodb.js          # Configuración MongoDB
+│   │   └── mysql.js            # Configuración MySQL
+│   ├── routes/
+│   │   ├── usuarios.js         # Autenticación y usuarios
+│   │   ├── reservas.js         # CRUD de reservas
+│   │   ├── palas.js           # Catálogo de palas
+│   │   ├── articulos.js       # Artículos y noticias
+│   │   ├── pistas.js          # Información de pistas
+│   │   └── torneos.js         # Gestión de torneos
+│   ├── .env.example           # Template de variables de entorno
+│   ├── server.js              # Servidor principal
+│   └── package.json           # Dependencias del backend
+├── frontend/
+│   ├── index.html             # Página principal
+│   ├── css/styles.css         # Estilos responsivos
+│   └── js/script.js           # Frontend con API integration
+└── test/
+    └── integration-test.js     # Suite de pruebas automatizadas
 ```
 
-## 🚀 Instalación y Uso
+## 🛠️ Stack Tecnológico
 
-1. **Clonar/Descargar el proyecto** en tu servidor local
-2. **Abrir `index.html`** en tu navegador web
-3. **¡Listo!** - No requiere instalación adicional
+### Backend
+- **Node.js + Express.js**: Servidor API REST
+- **MongoDB**: Base de datos para usuarios, reservas y torneos
+- **MySQL (MariaDB)**: Base de datos para contenido estático
+- **JWT**: Autenticación y autorización
+- **bcrypt**: Encriptación de contraseñas
+- **CORS**: Control de acceso entre dominios
+- **Helmet**: Seguridad HTTP headers
+- **Express Rate Limit**: Limitación de requests
 
-### Requisitos
-- Navegador web moderno (Chrome, Firefox, Safari, Edge)
-- JavaScript habilitado
-- Conexión a internet (para FontAwesome CDN)
+### Frontend
+- **HTML5**: Estructura semántica
+- **CSS3**: Grid, Flexbox, animaciones
+- **JavaScript ES6+**: Integración con API
+- **LocalStorage**: Fallback y cache
+- **Responsive Design**: Mobile-first approach
 
-## 💻 Tecnologías Utilizadas
+## 🚀 Instalación y Configuración
 
-- **HTML5**: Estructura semántica y accesible
-- **CSS3**: Estilos modernos con Grid, Flexbox y animaciones
-- **JavaScript ES6+**: Funcionalidad interactiva y gestión de datos
-- **FontAwesome**: Iconografía profesional
-- **LocalStorage API**: Persistencia de datos del cliente
+### Requisitos Previos
+- Node.js 18+ instalado
+- MongoDB running (local o remoto)
+- MySQL/MariaDB running (local o remoto)
 
-## 🎯 Funcionalidades Detalladas
+### 1. Clonar el Repositorio
+```bash
+git clone https://github.com/tuusuario/web-padel.git
+cd web-padel
+```
 
-### ✅ **Sistema de Reservas**
-- Validación de formularios en tiempo real
-- Prevención de conflictos de horarios
-- Cálculo automático de precios
-- Confirmación visual de reservas
+### 2. Configurar el Backend
+```bash
+cd backend
+npm install
+```
 
-### 📱 **Diseño Responsivo**
-- Navegación móvil con menú hamburguesa
-- Layouts adaptativos para todas las pantallas
-- Optimizado para touch en dispositivos móviles
+### 3. Configurar Variables de Entorno
+```bash
+# Copia el archivo de ejemplo
+cp .env.example .env
 
-### 💾 **Gestión de Datos**
-- Almacenamiento automático en localStorage
-- Auto-guardado cada 30 segundos
-- Recuperación de datos al recargar página
-- Exportación de reservas (función disponible en consola)
+# Edita .env con tus configuraciones:
+nano .env
+```
 
-### 🎨 **Interfaz de Usuario**
-- Animaciones CSS suaves
-- Modal de confirmación
-- Indicadores visuales de estado
+### 4. Configuración de Base de Datos
+
+#### Variables de entorno requeridas (.env):
+```bash
+# Servidor
+PORT=3000
+NODE_ENV=development
+
+# MySQL - Contenido estático (palas, artículos, pistas)
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=tu_usuario_mysql
+MYSQL_PASSWORD=tu_contraseña_mysql
+MYSQL_DATABASE=backend_laravel
+
+# MongoDB - Datos dinámicos (usuarios, reservas, torneos)
+MONGODB_URI=mongodb://localhost:27017/web_padel_db
+
+# Seguridad
+JWT_SECRET=tu_clave_secreta_jwt_minimo_32_caracteres
+API_RATE_LIMIT=100
+
+# CORS
+CORS_ORIGIN=http://localhost:8080,http://127.0.0.1:8080,http://localhost:5500
+```
+
+### 5. Iniciar el Servidor
+```bash
+# Desarrollo con nodemon
+npm run dev
+
+# O producción
+npm start
+```
+
+### 6. Abrir el Frontend
+Abrir `index.html` en un servidor web local (puerto 5500, 8080, etc.)
+
+## 🔐 API Endpoints
+
+### Autenticación
+```
+POST /api/usuarios/register    # Registro de usuarios
+POST /api/usuarios/login       # Login
+GET  /api/usuarios/profile     # Perfil (requiere JWT)
+```
+
+### Reservas (requiere autenticación)
+```
+GET    /api/reservas          # Listar todas las reservas
+POST   /api/reservas          # Crear nueva reserva
+PUT    /api/reservas/:id      # Actualizar reserva (solo propietario)
+DELETE /api/reservas/:id      # Eliminar reserva (solo propietario)
+```
+
+### Contenido Estático
+```
+GET /api/palas               # Catálogo de palas
+GET /api/articulos           # Artículos y noticias
+GET /api/pistas              # Información de pistas
+GET /api/torneos             # Lista de torneos
+```
+
+## 🧪 Testing
+
+### Suite de Pruebas Automatizadas
+```bash
+# Ejecutar pruebas de integración
+node test/integration-test.js
+```
+
+### Cobertura de Pruebas
+- ✅ Conectividad del servidor
+- ✅ Autenticación (registro, login, perfil)
+- ✅ CRUD de reservas con autenticación
+- ✅ Seguridad y autorización
+- ✅ Validación de datos
+- ✅ Integridad de base de datos
+
+## 🔒 Seguridad
+
+### Medidas Implementadas
+- **Autenticación JWT**: Tokens seguros con expiración
+- **Encriptación bcrypt**: Passwords hasheadas
+- **Rate Limiting**: 100 requests por 15 minutos
+- **CORS**: Control de orígenes permitidos
+- **Helmet**: Headers de seguridad HTTP
+- **Validación de entrada**: Sanitización de datos
+- **Variables de entorno**: Datos sensibles protegidos
+
+### Archivo .gitignore
+```
+# ARCHIVOS SENSIBLES EXCLUIDOS
+.env
+.env.*
+*.sql
+*.sqlite
+*.key
+*.pem
+node_modules/
+logs/
+```
+
+## 📋 Uso de la Aplicación
+
+### 1. Registro/Login
+- Registrarse con email y contraseña
+- Iniciar sesión para acceder a reservas
+- Token JWT automático para sesiones
+
+### 2. Hacer Reservas
+- Seleccionar pista, fecha, hora y duración
+- Confirmación en tiempo real
+- Solo usuarios autenticados
+
+### 3. Gestionar Reservas
+- Ver mis reservas en el panel
+- Editar/eliminar solo mis reservas
+- Validación de propiedad
+
+### 4. Navegación
+- Menú responsivo con hamburguesa móvil
 - Scroll suave entre secciones
-
-## 📋 **Cómo Usar la Aplicación**
-
-### Hacer una Reserva:
-1. Navegar a la sección "Reservas"
-2. Completar el formulario con tus datos
-3. Seleccionar pista, fecha, hora y duración
-4. Confirmar la reserva
-5. Ver confirmación en modal
-
-### Gestionar Reservas:
-- **Ver reservas**: Panel lateral derecho
-- **Eliminar reserva**: Botón X en cada reserva
-- **Limpiar todas**: Botón "Limpiar Todas las Reservas"
-
-### Navegación:
-- **Menú superior**: Enlaces a todas las secciones
-- **Scroll suave**: Navegación automática
-- **Responsive**: Menú hamburguesa en móvil
+- Indicadores de estado visual
 
 ## 🛠️ Personalización
 
-### Modificar Precios:
+### Configurar Precios
 ```javascript
-// En js/script.js - CONFIG object
-precios: {
-    central: 25,  // €25/hora
-    norte: 20,    // €20/hora 
-    sur: 15       // €15/hora
+// En js/script.js
+const CONFIG = {
+    precios: {
+        central: 25,  // €/hora
+        norte: 20,
+        sur: 15
+    }
 }
 ```
 
-### Modificar Horarios:
+### Modificar JWT
 ```javascript
-// En js/script.js - CONFIG object
-horarios: {
-    inicio: 8,    // 8:00 AM
-    fin: 23,      // 11:00 PM
-    intervalo: 1  // Cada 1 hora
-}
+// En backend/routes/usuarios.js
+jwt.sign(payload, process.env.JWT_SECRET, { 
+    expiresIn: '24h' // Cambiar duración
+});
 ```
 
-### Cambiar Colores:
-```css
-/* En css/styles.css - :root variables */
-:root {
-    --primary-color: #2c5aa0;    /* Azul principal */
-    --accent-color: #f39c12;     /* Naranja acentos */
-    --success-color: #27ae60;    /* Verde éxito */
-}
+## 🔧 Desarrollo
+
+### Estructura del Código
+
+#### Backend Routes
+- `usuarios.js`: Autenticación JWT completa
+- `reservas.js`: CRUD con middleware de autenticación
+- `palas.js`: Contenido estático desde MySQL
+- Otros routes: Gestión de contenido
+
+#### Frontend Integration
+- `script.js`: API calls con manejo de tokens
+- `styles.css`: Diseño responsivo completo
+- `index.html`: SPA con secciones dinámicas
+
+### Scripts Disponibles
+```bash
+npm run dev        # Desarrollo con nodemon
+npm start          # Producción
+npm test           # Ejecutar pruebas
 ```
-
-## 🔧 Funciones Avanzadas
-
-### Consola del Desarrollador:
-- `exportarReservas()`: Exporta reservas a CSV
-- `reservas`: Ver array de reservas actuales
-- `CONFIG`: Ver configuración actual
-
-### LocalStorage:
-- Clave: `padel_reservas` - Datos de reservas
-- Clave: `padel_contador` - Contador de IDs
 
 ## 📱 Compatibilidad
 
-✅ **Navegadores Soportados:**
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
+✅ **Navegadores**: Chrome 60+, Firefox 55+, Safari 12+, Edge 79+
+✅ **Dispositivos**: Desktop, Tablet, Mobile
+✅ **APIs**: localStorage fallback, modern fetch API
 
-✅ **Dispositivos:**
-- Desktop (1200px+)
-- Tablet (768px - 1199px) 
-- Mobile (< 768px)
+## 🤝 Contribuir
 
-## 🤝 Soporte y Contribuciones
-
-Para reportar bugs o sugerir mejoras:
-1. Revisar el código en los archivos fuente
-2. Probar en diferentes navegadores
-3. Verificar la consola para errores
+1. Fork el repositorio
+2. Crear rama feature (`git checkout -b feature/AmazingFeature`)
+3. Commit cambios (`git commit -m 'Add AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abrir Pull Request
 
 ## 📄 Licencia
 
-Este proyecto es de uso libre para fines educativos y comerciales.
+Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más información.
 
 ---
 
-**Desarrollado con ❤️ para PadelClub Elite**
+**🎾 PadelClub Elite - Gestión Profesional de Reservas**
 
-*Sistema de reservas moderno, intuitivo y profesional*
+*Sistema completo full-stack con autenticación JWT y arquitectura híbrida*
